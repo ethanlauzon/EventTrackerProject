@@ -36,8 +36,13 @@ public class TrainerServiceImpl implements TrainerService {
 
 	@Override
 	public boolean delete(int trainerId) {
-		// TODO Auto-generated method stub
-		return false;
+		boolean deleted = false;
+		Trainer trainerToDelete = trainerRepo.queryById(trainerId);
+		if(trainerToDelete != null) {
+			trainerRepo.deleteById(trainerId);
+			deleted = true;
+		}
+		return deleted;
 	}
 
 }

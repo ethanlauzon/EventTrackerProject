@@ -5,6 +5,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -32,6 +33,20 @@ public class TrainerController {
 			res.setStatus(404);
 		}
 		return trainer;
+	}
+	
+	@DeleteMapping("trainers/{trainerId}")
+	public void deleteTrainer(@PathVariable Integer trainerId, HttpServletResponse res) {
+		try {
+			if(trainerService.delete(trainerId)) {
+				res.setStatus(204);
+			}else {
+				res.setStatus(404);
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+			res.setStatus(400);
+			}
 	}
 	
 	
