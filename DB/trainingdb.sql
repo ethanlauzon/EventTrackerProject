@@ -22,7 +22,10 @@ DROP TABLE IF EXISTS `trainer` ;
 
 CREATE TABLE IF NOT EXISTS `trainer` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `name` VARCHAR(45) NULL,
+  `name` VARCHAR(100) NULL,
+  `bench` INT NULL,
+  `squat` INT NULL,
+  `deadlift` INT NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
@@ -42,7 +45,9 @@ SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `trainingdb`;
-INSERT INTO `trainer` (`id`, `name`) VALUES (1, 'Ethan Lauzon');
+INSERT INTO `trainer` (`id`, `name`, `bench`, `squat`, `deadlift`) VALUES (1, 'Ethan Lauzon', 135, 165, 265);
+INSERT INTO `trainer` (`id`, `name`, `bench`, `squat`, `deadlift`) VALUES (2, 'Paul Ledney', 225, 185, 315);
+INSERT INTO `trainer` (`id`, `name`, `bench`, `squat`, `deadlift`) VALUES (3, 'King Diamond', 185, 225, 300);
 
 COMMIT;
 

@@ -15,6 +15,12 @@ public class Trainer {
 	private int id;
 	
 	private String name;
+	
+	private int bench;
+	
+	private int squat;
+	
+	private int deadlift;
 
 	public Trainer() {
 		super();
@@ -36,6 +42,30 @@ public class Trainer {
 		this.name = name;
 	}
 
+	public int getBench() {
+		return bench;
+	}
+
+	public void setBench(int bench) {
+		this.bench = bench;
+	}
+
+	public int getSquat() {
+		return squat;
+	}
+
+	public void setSquat(int squat) {
+		this.squat = squat;
+	}
+
+	public int getDeadlift() {
+		return deadlift;
+	}
+
+	public void setDeadlift(int deadlift) {
+		this.deadlift = deadlift;
+	}
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
@@ -55,8 +85,11 @@ public class Trainer {
 
 	@Override
 	public String toString() {
-		return "Trainer [id=" + id + ", name=" + name + "]";
+		return "Trainer [id=" + id + ", name=" + name + ", bench=" + bench + ", squat=" + squat + ", deadlift="
+				+ deadlift + "]";
 	}
+
+	
 	
 	
 }
