@@ -8,6 +8,6 @@ public interface TrainerService {
 	List<Trainer> listAllTrainers();
 	Trainer showTrainer(int trainerId);
 	Trainer create(Trainer trainer);
-	Trainer update(int trainerId);
+	Trainer update(int trainerId, Trainer newTrainer);
 	boolean delete(int trainerId);
 }

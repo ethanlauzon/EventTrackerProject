@@ -25,13 +25,21 @@ public class TrainerServiceImpl implements TrainerService {
 
 	@Override
 	public Trainer create(Trainer trainer) {
-		return null;
+		trainerRepo.saveAndFlush(trainer);
+		return trainer;
 	}
 
 	@Override
-	public Trainer update(int trainerId) {
-		// TODO Auto-generated method stub
-		return null;
+	public Trainer update(int trainerId, Trainer newTrainer) {
+		Trainer trainerToUpdate = trainerRepo.queryById(trainerId);
+		if(trainerToUpdate != null) {
+			trainerToUpdate.setName(newTrainer.getName());
+			trainerToUpdate.setBench(newTrainer.getBench());
+			trainerToUpdate.setDeadlift(newTrainer.getDeadlift());
+			trainerToUpdate.setSquat(newTrainer.getSquat());
+		}
+		trainerRepo.saveAndFlush(trainerToUpdate);
+		return trainerToUpdate;
 	}
 
 	@Override
