@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Training Tracker</title>
+<script type="text/javascript" src="js/script.js"></script>
+<!-- CSS only -->
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"
+	crossorigin="anonymous">
+<link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+
+	<div class="contrainer-fluid">
+
+		<h1>Welcome to Training Tracker</h1>
+		
+		<div id="errorsDiv">
+		</div>
+		
+		<div id="trainerDetailsDiv">
+		</div>
+
+		<!-- <form name="trainerForm">
+		<br>
+			<input type="number" name="id">
+			<button name="lookup">Get Trainer by ID</button>
+		</form> -->
+		<div id="trainerListDiv">
+			<table><br>
+				<thead>
+					<tr>
+						<th>ID</th>
+						<th>Name</th>
+						<th>Bench Press</th>
+						<th>Deadlift</th>
+						<th>Squat</th>
+					</tr>
+				</thead>
+				<tbody id="trainerTableBody"></tbody>
+			</table>
+		</div>
+		<br>
+
+		<form name="addTrainerForm">
+			<label for="name">Full Name</label><br> 
+			<input name="name" type="text"> <br>
+			<label for="bench">Bench Press</label><br>
+			<input name="bench" type="number"> <br>
+			<label for="deadlift">Deadlift</label><br>
+			<input name="deadlift" type="number"><br>
+			<label for="squat">Squat</label><br>
+			<input name="squat" type="number"><br><br>
+			<button name="addTrainerButton">Add Trainer</button>
+		</form>
+	</div>
+		
+</body>
+</html>
