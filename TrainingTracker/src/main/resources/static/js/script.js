@@ -18,7 +18,7 @@ function init() {
 		};
 		createTrainer(trainer);
 	})
-	}
+}
 
 function loadTrainerList() {
 	//xhr to get the list
@@ -98,6 +98,11 @@ function displayTrainer(trainer) {
 	let listDiv = document.getElementById('trainerListDiv');
 	listDiv.style.display = 'none';
 
+	let updateDiv = document.getElementById('trainerUpdateButton');
+	updateDiv.style.display = 'block';
+	updateDiv.textContent = '';
+
+
 	let trainerDiv = document.getElementById('trainerDetailsDiv');
 	trainerDiv.style.display = 'block';
 	trainerDiv.textContent = '';
@@ -117,17 +122,18 @@ function displayTrainer(trainer) {
 	h2 = document.createElement('h2');
 	h2.textContent = 'PR Squat: ' + trainer.squat + 'lbs';
 	trainerDiv.appendChild(h2);
-	
+
 	let deleteButton = document.createElement('button');
 	deleteButton.textContent = 'Delete Current Trainer';
 	trainerDiv.appendChild(deleteButton);
-	deleteButton.addEventListener('click', function(evt){
+	deleteButton.addEventListener('click', function(evt) {
 		evt.preventDefault();
 		console.log('delete trainer button clicked');
 		deleteTrainer(trainer.id);
 		listDiv.style.display = 'block';
 		trainerDiv.style.display = 'none';
-		deleteButton.remove();		
+		updateButton.remove();
+		deleteButton.remove();
 	})
 
 	let backButton = document.createElement('button');
@@ -136,17 +142,18 @@ function displayTrainer(trainer) {
 	backButton.addEventListener('click', function() {
 		listDiv.style.display = 'block';
 		trainerDiv.style.display = 'none';
+		updateButton.remove();
 		deleteButton.remove();
 	})
-	
+
 	let updateButton = document.createElement('button');
 	updateButton.textContent = 'Update Current Trainer';
-	trainerDiv.appendChild(updateButton);
-	updateButton.addEventListener('click', function(){
+	updateDiv.appendChild(updateButton);
+	updateButton.addEventListener('click', function() {
 		console.log('update trainer button clicked');
 		updateTrainer(trainer.id);
-		listDiv.style.display = 'block';
-		trainerDiv.style.display = 'none';
+		updateDiv.style.display = 'block';
+		updateDiv.style.display = 'none';	
 		deleteButton.remove();
 	})
 }
@@ -189,21 +196,36 @@ function deleteTrainer(trainerId) {
 	xhr.send();
 }
 
-function updateTrainer(trainerId){
+function updateTrainer(trainerId) {
+	let updatedTrainer = {
+		name: addTrainerForm.name.value,
+		bench: addTrainerForm.bench.value,
+		deadlift: addTrainerForm.deadlift.value,
+		squat: addTrainerForm.squat.value,
+	};
 	let xhr = new XMLHttpRequest();
 	xhr.open('PUT', 'api/trainers/' + trainerId);
-	
+
 	xhr.setRequestHeader("Content-type", "application/json");
-	
-	xhr.onreadystatechange = function(){
-		if (xhr.readyState === 4){
-			loadTrainerList();
+
+	xhr.onreadystatechange = function() {
+		if (xhr.readyState === 4) {
+			if (xhr.status === 204) {
+				if (xhr.status === 200 || xhr.status === 201) {
+					updatedTrainer = JSON.parse(xhr.responseText);
+//					displayTrainer(updatedTrainer);
+					loadTrainerList(updatedTrainer);
+				}
+			}
+
+			else {
+				displayError('Error updating Trainer: ' + xhr.status + ', ' + xhr.statusText);
+			}
 		}
-		else {
-			displayError('Error updating Trainer: ' + xhr.status + ', ' + xhr.statusText);
-		}
-	}
-	xhr.send();
+	};
+	let trainerJson = JSON.stringify(updatedTrainer);
+	xhr.send(trainerJson);
+	addTrainerForm.reset();
 }
 
 
