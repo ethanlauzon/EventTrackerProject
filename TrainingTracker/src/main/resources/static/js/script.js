@@ -122,6 +122,11 @@ function displayTrainer(trainer) {
 	h2 = document.createElement('h2');
 	h2.textContent = 'PR Squat: ' + trainer.squat + 'lbs';
 	trainerDiv.appendChild(h2);
+	
+	h2 = document.createElement('h2');
+	let plTotal = trainer.squat + trainer.bench + trainer.deadlift;
+	h2.textContent = 'PL total: ' + plTotal + 'lbs';
+	trainerDiv.appendChild(h2);
 
 	let deleteButton = document.createElement('button');
 	deleteButton.textContent = 'Delete Current Trainer';
