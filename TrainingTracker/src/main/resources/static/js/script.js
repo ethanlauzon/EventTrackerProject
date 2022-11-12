@@ -138,6 +138,17 @@ function displayTrainer(trainer) {
 		trainerDiv.style.display = 'none';
 		deleteButton.remove();
 	})
+	
+	let updateButton = document.createElement('button');
+	updateButton.textContent = 'Update Current Trainer';
+	trainerDiv.appendChild(updateButton);
+	updateButton.addEventListener('click', function(){
+		console.log('update trainer button clicked');
+		updateTrainer(trainer.id);
+		listDiv.style.display = 'block';
+		trainerDiv.style.display = 'none';
+		deleteButton.remove();
+	})
 }
 
 function createTrainer(trainer) {
@@ -181,6 +192,8 @@ function deleteTrainer(trainerId) {
 function updateTrainer(trainerId){
 	let xhr = new XMLHttpRequest();
 	xhr.open('PUT', 'api/trainers/' + trainerId);
+	
+	xhr.setRequestHeader("Content-type", "application/json");
 	
 	xhr.onreadystatechange = function(){
 		if (xhr.readyState === 4){
