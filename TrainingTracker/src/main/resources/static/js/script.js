@@ -23,7 +23,7 @@ function init() {
 function loadTrainerList() {
 	//xhr to get the list
 	let xhr = new XMLHttpRequest();
-	xhr.open('GET', '/api/trainers');
+	xhr.open('GET', 'api/trainers');
 	xhr.onreadystatechange = function() {
 		if (xhr.readyState === xhr.DONE) {
 			if (xhr.status === 200) {
@@ -78,7 +78,7 @@ function displayTrainerList(trainers) {
 
 function getTrainer(trainerId) {
 	let xhr = new XMLHttpRequest();
-	xhr.open('GET', '/api/trainers/' + trainerId);
+	xhr.open('GET', 'api/trainers/' + trainerId);
 	xhr.onreadystatechange = function() {
 		if (xhr.readyState === xhr.DONE) {
 			if (xhr.status === 200) {
