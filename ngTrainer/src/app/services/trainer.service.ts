@@ -25,4 +25,47 @@ export class TrainerService {
       })
     );
   }
+
+  show(trainerId: number): Observable<Trainer> {
+    return this.http.get<Trainer>(this.url + '/' + trainerId).pipe(
+      catchError((err: any) => {
+        console.log(err);
+        return throwError(
+          () =>
+            new Error('TodoService.show():error retrieving Todo: ' + err)
+        );
+      })
+    );
+  }
+
+  create(trainer: Trainer) {
+    return this.http.post<Trainer>(this.url, trainer).pipe(
+      catchError((err: any) => {
+        console.log(err);
+        return throwError(
+          () => new Error('TodoService.create():error creating Todo: ' + err)
+        );
+      })
+    );
+  }
+  update(trainer: Trainer) {
+    return this.http.put<Trainer>(this.url + '/' + trainer.id, trainer).pipe(
+      catchError((err: any) => {
+        console.log(err);
+        return throwError(
+          () => new Error('TodoService.update():error updating Todo: ' + err)
+        );
+      })
+    );
+  }
+  destroy(id: number) {
+    return this.http.delete<void>(this.url + '/' + id).pipe(
+      catchError((err: any) => {
+        console.log(err);
+        return throwError(
+          () => new Error('TodoService.destroy():error deleting Todo: ' + err)
+        );
+      })
+    );
+  }
 }
