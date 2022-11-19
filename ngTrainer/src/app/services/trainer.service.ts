@@ -39,6 +39,8 @@ export class TrainerService {
   }
 
   create(trainer: Trainer) {
+    console.warn(this.url);
+    console.warn(trainer);
     return this.http.post<Trainer>(this.url, trainer).pipe(
       catchError((err: any) => {
         console.log(err);

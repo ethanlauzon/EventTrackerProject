@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NgbToastModule } from '@ng-bootstrap/ng-bootstrap';
 import { Trainer } from 'src/app/models/trainer';
 import { TrainerService } from 'src/app/services/trainer.service';
 
@@ -11,6 +12,7 @@ export class HomeComponent implements OnInit {
 
   trainers: Trainer[] = [];
   selected: Trainer | null = null;
+  newTrainer: Trainer = new Trainer();
 
   constructor(
     private trainerService: TrainerService
@@ -38,14 +40,15 @@ export class HomeComponent implements OnInit {
     this.trainerService.index().subscribe(
       {
         next: (data: Trainer[]) => {
-          this.trainers = data
+          this.trainers = data;
+          this.selected = null;
         },
         error: (err: any) => {
           console.error('Trainers.reload(): error loading trainers:');
           console.error(err);
         }
       }
-    )
+    );
   }
 
   delete(trainer: Trainer){
@@ -67,7 +70,33 @@ export class HomeComponent implements OnInit {
   }
 
   edit(trainer: Trainer){
+    this.trainerService.update(trainer).subscribe(
+      {
+        next: (data: Trainer | null) => {
+          this.selected = data;
+          this.reload();
+        },
+        error: (err: any) => {
+          console.error('Trainer.edit(): error updating trainer:');
+          console.error(err);
+        }
+      }
+    );
+  }
 
+  addTrainer(){
+    this.trainerService.create(this.newTrainer).subscribe(
+      {
+        next: (data: any) => {
+          this.newTrainer = new Trainer();
+          this.reload();
+        },
+        error: (err: any) => {
+          console.error('trainer.create(): error creating trainer:');
+          console.error(err);
+        }
+      }
+    );
   }
 
 
