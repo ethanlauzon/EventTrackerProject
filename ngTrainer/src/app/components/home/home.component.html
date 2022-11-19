@@ -39,10 +39,22 @@
   <h6>ID: {{ selected.id }}</h6>
   <h6>Name: {{ selected.name }}</h6>
   <p>Bench Press: {{ selected.bench }}lbs</p>
-  <p>Squat: {{ selected.squat}}lbs</p>
   <p>Deadlift: {{ selected.deadlift }}lbs</p>
-  <button class="btn btn-outline-primary" (click)="reload()">Close Details</button>
-  <button class="btn btn-outline-primary" (click)="edit(selected)">Edit</button>
-  <button class="btn btn-outline-danger" (click)="delete(selected)">Delete</button>
+  <p>Squat: {{ selected.squat}}lbs</p>
+  <button class="btn btn-outline-primary" (click)="reload()">Close Trainer Details</button>
+  <button class="btn btn-outline-danger" (click)="delete(selected)">Delete Trainer</button>
+  <br>
+  <form name="editTrainerForm">
+    <br>
+    <label for="name">Full Name</label><br>
+    <input name="name" type="text" [(ngModel)]="selected.name"> <br>
+    <label for="bench">Bench Press</label><br>
+    <input name="bench" type="number"[(ngModel)]="selected.bench"> <br>
+    <label for="deadlift">Deadlift</label><br>
+    <input name="deadlift" type="number"[(ngModel)]="selected.deadlift"><br>
+    <label for="squat">Squat</label><br>
+    <input name="squat" type="number"[(ngModel)]="selected.squat"><br><br>
+    <button class="btn btn-outline-primary" (click)="edit(selected)">Persist Edit</button>
+  </form>
 </div>
 </div>
