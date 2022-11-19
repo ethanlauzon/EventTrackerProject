@@ -10,6 +10,7 @@ import { TrainerService } from 'src/app/services/trainer.service';
 export class HomeComponent implements OnInit {
 
   trainers: Trainer[] = [];
+  selected: Trainer | null = null;
 
   constructor(
     private trainerService: TrainerService
@@ -27,6 +28,48 @@ export class HomeComponent implements OnInit {
       }
     });
   }
+
+  viewTrainer(trainer: Trainer){
+    this.selected = trainer;
+    console.log(trainer.id);
+  }
+
+  reload(){
+    this.trainerService.index().subscribe(
+      {
+        next: (data: Trainer[]) => {
+          this.trainers = data
+        },
+        error: (err: any) => {
+          console.error('Trainers.reload(): error loading trainers:');
+          console.error(err);
+        }
+      }
+    )
+  }
+
+  delete(trainer: Trainer){
+    this.trainerService.destroy(trainer.id).subscribe(
+      {
+        next: () => {
+          this.reload();
+        },
+        error: (err: any) => {
+          console.error('Trainers.deleteTrainer(): error deleting trainer:');
+          console.error(err);
+        }
+      }
+    );
+  }
+
+  close(){
+
+  }
+
+  edit(trainer: Trainer){
+
+  }
+
 
   ngOnInit(): void {
     this.loadTrainers();

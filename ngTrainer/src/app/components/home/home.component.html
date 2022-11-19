@@ -1,1 +1,49 @@
-<p>home works!</p>
+<h1>Welcome to Training Tracker</h1>
+<div class="container-fluid">
+ <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Bench Press</th>
+        <th>Deadlift</th>
+        <th>Squat</th>
+      </tr>
+    </thead>
+
+    <tbody *ngFor="let trainer of trainers">
+        <tr (click)="viewTrainer(trainer)">
+          <td>{{trainer.id}}</td>
+          <td>{{trainer.name}}</td>
+          <td>{{trainer.bench}}</td>
+          <td>{{trainer.squat}}</td>
+          <td>{{trainer.deadlift}}</td>
+        </tr>
+      </tbody>
+
+
+  </table>
+  <form name="addTrainerForm">
+    <label for="name">Full Name</label><br>
+    <input name="name" type="text"> <br>
+    <label for="bench">Bench Press</label><br>
+    <input name="bench" type="number"> <br>
+    <label for="deadlift">Deadlift</label><br>
+    <input name="deadlift" type="number"><br>
+    <label for="squat">Squat</label><br>
+    <input name="squat" type="number"><br><br>
+    <button name="addTrainerButton">Add Trainer</button>
+    <div id="trainerUpdateButton"></div>
+  </form>
+
+  <div id="todoDetails" *ngIf="selected">
+  <h4>{{ selected.id }}</h4>
+  <h3>{{ selected.name }}</h3>
+  <p>{{ selected.bench }}</p>
+  <p>{{ selected.squat}}</p>
+  <p>{{ selected.deadlift }}</p>
+  <button class="btn btn-outline-primary" (click)="reload()">Close Details</button>
+  <button class="btn btn-outline-primary" (click)="edit(selected)">Edit</button>
+  <button class="btn btn-outline-danger" (click)="delete(selected)">Delete</button>
+</div>
+</div>

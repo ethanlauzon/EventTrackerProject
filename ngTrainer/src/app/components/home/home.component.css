@@ -1,0 +1,25 @@
+@charset "UTF-8";
+
+body{
+	background-color: MintCream;
+}
+
+th{
+	background-color: black;
+	color: white;
+	border: 1px solid;
+	padding: 15px;
+}
+tr, td{
+	padding: 15px;
+	border: 1px solid;
+}
+table{
+	border-collapse: collapse;
+	border: 1px solid;
+	margin-left: auto;
+  	margin-right: auto;
+}
+
+tr:hover {background-color: grey;}
+
